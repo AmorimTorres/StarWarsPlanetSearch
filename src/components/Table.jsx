@@ -60,3 +60,9 @@ function Table() {
 }
 
 export default Table;
+
+// REFERENCIAS:
+
+// PARA RESOLUÇÃO DO REQUISITO 2, FORAM UTILIZADAS OS SEGUINTES CONTEÚDOS DA INTERNET
+// https://stackoverflow.com/questions/35582978/best-way-to-filter-table-in-react
+// https://www.youtube.com/watch?v=5Tq4-UgPTDs
