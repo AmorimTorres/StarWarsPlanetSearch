@@ -1,27 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MyContext from './myContext';
 
 function Provider({ children }) {
-  const INITIAL_STATE = { nome: 'André', idade: 30 };
-  const [state, setState] = useState(INITIAL_STATE);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchAPI = async () => {
       const response = await fetch('https://swapi-trybe.herokuapp.com/api/planets/');
-      const data = await response.json();
-      const dataResults = data.results;
-      console.log(dataResults);
+      const { results } = await response.json();
+      setData(results);
     };
     fetchAPI();
   }, []);
 
-  const contextData = {
-    state,
-    setState,
+  const context = {
+    data,
   };
 
   return (
-    <MyContext.Provider value={ contextData }>
+    <MyContext.Provider value={ context }>
       {children}
     </MyContext.Provider>
   );
