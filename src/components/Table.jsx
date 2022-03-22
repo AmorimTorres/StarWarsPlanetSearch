@@ -1,11 +1,22 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import context from '../context/myContext';
 
 function Table() {
   const { data } = useContext(context);
-  console.log(data);
+  const [filterByName, setFilterByName] = useState('');
+  console.log(filterByName);
+  const filterPlanetsByName = data
+    .filter((planet) => planet.name.includes(filterByName));
   return (
     <div>
+      <div>
+        <input
+          data-testid="name-filter"
+          type="text"
+          value={ filterByName }
+          onChange={ ({ target }) => setFilterByName(target.value) }
+        />
+      </div>
       <table border="2">
         <thead>
           <tr>
@@ -25,7 +36,7 @@ function Table() {
           </tr>
         </thead>
         <tbody>
-          {data.map((item) => (
+          {filterPlanetsByName.map((item) => (
             <tr key={ item.name }>
               <td>{item.name}</td>
               <td>{item.rotation_period}</td>
