@@ -1,22 +1,16 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import context from '../context/myContext';
+import Inputs from './Inputs';
 
 function Table() {
-  const { data } = useContext(context);
-  const [filterByName, setFilterByName] = useState('');
-  console.log(filterByName);
+  const { filterByName, data } = useContext(context);
+
   const filterPlanetsByName = data
-    .filter((planet) => planet.name.includes(filterByName));
+    .filter((planet) => planet.name.includes(filterByName.name));
+
   return (
     <div>
-      <div>
-        <input
-          data-testid="name-filter"
-          type="text"
-          value={ filterByName }
-          onChange={ ({ target }) => setFilterByName(target.value) }
-        />
-      </div>
+      <Inputs />
       <table border="2">
         <thead>
           <tr>
@@ -66,3 +60,13 @@ export default Table;
 // PARA RESOLUÇÃO DO REQUISITO 2, FORAM UTILIZADAS OS SEGUINTES CONTEÚDOS DA INTERNET
 // https://stackoverflow.com/questions/35582978/best-way-to-filter-table-in-react
 // https://www.youtube.com/watch?v=5Tq4-UgPTDs
+
+// PARA A RESOLUAÇÃO DO REQUISITO 3, FORAM UTILIZADAS AS OS SEGUINTES CONTEÚDOS DA INTERNET:
+// PARA INPUT TEXT QUE SÓ ACEITA NUMBERS: https://stackoverflow.com/questions/43687964/only-numbers-input-number-in-react
+
+/* filterPlanetsByName.filter((planet) => {
+    return filters.every (column, value, comparison)
+    if comparison === maior que
+    return planet.colum > value
+  })
+  */
