@@ -24,7 +24,7 @@ function Table() {
       }));
 
   return (
-    <div>
+    <div className="table">
       <Inputs />
       <table border="1">
         <thead>
@@ -75,27 +75,3 @@ export default Table;
 // PARA RESOLUÇÃO DO REQUISITO 2, FORAM UTILIZADAS OS SEGUINTES CONTEÚDOS DA INTERNET
 // https://stackoverflow.com/questions/35582978/best-way-to-filter-table-in-react
 // https://www.youtube.com/watch?v=5Tq4-UgPTDs
-
-// PARA A RESOLUAÇÃO DO REQUISITO 3, FORAM UTILIZADAS AS OS SEGUINTES CONTEÚDOS DA INTERNET:
-// PARA INPUT TEXT QUE SÓ ACEITA NUMBERS: https://stackoverflow.com/questions/43687964/only-numbers-input-number-in-react
-
-/* filterPlanetsByName.filter((planet) => {
-    return filters.every (column, value, comparison)
-    if comparison === maior que
-    return planet.colum > value
-  })
-  */
-
-/*   console.log(item);
-  if (comparison === 'maior que') {
-    return columnValue > value;
-  } if (comparison === 'menor que') {
-    return columnValue < value;
-  } if (comparison === 'igual a') {
-    return columnValue === value;
-  }
-  return true;  */
-
-/* if (filterByNumericValues.length === 0) {
-      return true;
-    } */

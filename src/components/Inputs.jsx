@@ -5,6 +5,7 @@ function Inputs() {
   const {
     setFilterByName,
     setFilterByNumericValues,
+    filterByNumericValues,
   } = useContext(context);
 
   const [filterInputs, setFilterInputs] = useState({
@@ -28,6 +29,24 @@ function Inputs() {
     setFilterByNumericValues((prevState) => [...prevState, filterInputs]);
   };
 
+  const columnOptions = [
+    'population',
+    'orbital_period',
+    'diameter',
+    'rotation_period',
+    'surface_water',
+  ];
+
+  filterByNumericValues
+    .filter((item) => columnOptions
+      .every(((col) => {
+        const { column } = item;
+        if (column === col) {
+          columnOptions.splice(columnOptions.indexOf(col), 1);
+        }
+        return true;
+      })));
+
   return (
     <div>
       <fieldset>
@@ -47,11 +66,9 @@ function Inputs() {
             name="column"
             onChange={ handleChange }
           >
-            <option value="population">population</option>
-            <option value="orbital_period">orbital_period</option>
-            <option value="diameter">diameter</option>
-            <option value="rotation_period">rotation_period</option>
-            <option value="surface_water">surface_water</option>
+            {columnOptions.map((item) => (
+              <option key={ item }>{item}</option>
+            ))}
           </select>
         </label>
         <label htmlFor="comparison-filter">
