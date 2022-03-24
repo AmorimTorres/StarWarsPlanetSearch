@@ -2,12 +2,15 @@ import React, { useContext, useState } from 'react';
 import context from '../context/myContext';
 
 function Inputs() {
-  const { setFilterByName } = useContext(context);
+  const {
+    setFilterByName,
+    setFilterByNumericValues,
+  } = useContext(context);
 
   const [filterInputs, setFilterInputs] = useState({
-    column: '',
-    comparison: '',
-    value: '',
+    column: 'population',
+    comparison: 'maior que',
+    value: 0,
   });
 
   const handleChangePlanetName = ({ target: { value } }) => {
@@ -19,6 +22,10 @@ function Inputs() {
       ...filterInputs,
       [name]: value,
     });
+  };
+
+  const handleClick = () => {
+    setFilterByNumericValues((prevState) => [...prevState, filterInputs]);
   };
 
   return (
@@ -40,7 +47,7 @@ function Inputs() {
             name="column"
             onChange={ handleChange }
           >
-            <option selected value="population">population</option>
+            <option value="population">population</option>
             <option value="orbital_period">orbital_period</option>
             <option value="diameter">diameter</option>
             <option value="rotation_period">rotation_period</option>
@@ -55,20 +62,27 @@ function Inputs() {
             onChange={ handleChange }
           >
             <option value="maior que">maior que</option>
-            <option selected value="menor que">menor que</option>
+            <option value="menor que">menor que</option>
             <option value="igual a">igual a</option>
           </select>
         </label>
         <label htmlFor="value-filter">
           <input
+            type="number"
             name="value"
+            value={ filterInputs.value }
             onChange={ handleChange }
             data-testid="value-filter"
             id="value-filter"
-            onKeyPress={ (e) => !/[0-9]/.test(e.key) && e.preventDefault() }
           />
         </label>
-        <button type="button" data-testid="button-filter"> FILTRAR </button>
+        <button
+          type="button"
+          data-testid="button-filter"
+          onClick={ handleClick }
+        >
+          FILTRAR
+        </button>
       </fieldset>
     </div>
   );

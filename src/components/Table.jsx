@@ -3,15 +3,30 @@ import context from '../context/myContext';
 import Inputs from './Inputs';
 
 function Table() {
-  const { filterByName, data } = useContext(context);
+  const { filterByName, data, filterByNumericValues } = useContext(context);
 
   const filterPlanetsByName = data
-    .filter((planet) => planet.name.includes(filterByName.name));
+    .filter((planet) => planet.name.toLowerCase().includes(filterByName.name));
+
+  const filterByInputs = filterPlanetsByName
+    .filter((planet) => filterByNumericValues
+      .every((objKeys) => {
+        const { column, comparison, value } = objKeys;
+        const columnValue = +planet[column];
+        if (comparison === 'maior que') {
+          return columnValue > +value;
+        } if (comparison === 'menor que') {
+          return columnValue < +value;
+        } if (comparison === 'igual a') {
+          return columnValue === +value;
+        }
+        return true;
+      }));
 
   return (
     <div>
       <Inputs />
-      <table border="2">
+      <table border="1">
         <thead>
           <tr>
             <th>Name</th>
@@ -30,7 +45,7 @@ function Table() {
           </tr>
         </thead>
         <tbody>
-          {filterPlanetsByName.map((item) => (
+          {filterByNumericValues && filterByInputs.map((item) => (
             <tr key={ item.name }>
               <td>{item.name}</td>
               <td>{item.rotation_period}</td>
@@ -70,3 +85,17 @@ export default Table;
     return planet.colum > value
   })
   */
+
+/*   console.log(item);
+  if (comparison === 'maior que') {
+    return columnValue > value;
+  } if (comparison === 'menor que') {
+    return columnValue < value;
+  } if (comparison === 'igual a') {
+    return columnValue === value;
+  }
+  return true;  */
+
+/* if (filterByNumericValues.length === 0) {
+      return true;
+    } */
