@@ -47,9 +47,20 @@ function Inputs() {
         return true;
       })));
 
+  const handleRemoveItem = (index) => {
+    const newList = [...filterByNumericValues];
+    newList.splice(index, 1);
+    setFilterByNumericValues([...newList]);
+  };
+
+  const handleRemoveAllItems = () => {
+    const newList = [];
+    setFilterByNumericValues(newList);
+  };
+
   return (
     <div>
-      <fieldset>
+      <div className="search_by_name">
         <label htmlFor="filter-by-name">
           Nome do planeta
           <input
@@ -59,6 +70,8 @@ function Inputs() {
             onChange={ handleChangePlanetName }
           />
         </label>
+      </div>
+      <fieldset className="search_inputs">
         <label htmlFor="column-filter">
           Coluna
           <select
@@ -100,6 +113,19 @@ function Inputs() {
         >
           FILTRAR
         </button>
+        <button
+          type="button"
+          data-testid="button-remove-filters"
+          onClick={ handleRemoveAllItems }
+        >
+          DELETAR
+        </button>
+        {filterByNumericValues.map(({ column, value, comparison }, index) => (
+          <div data-testid="filter" key={ index }>
+            <p>{`${column} ${comparison} ${value}`}</p>
+            <button type="button" onClick={ () => handleRemoveItem(index) }>X</button>
+          </div>
+        ))}
       </fieldset>
     </div>
   );

@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import context from '../context/myContext';
 import Inputs from './Inputs';
+// import '../style.css';
 
 function Table() {
   const { filterByName, data, filterByNumericValues } = useContext(context);
@@ -26,7 +27,7 @@ function Table() {
   return (
     <div className="table">
       <Inputs />
-      <table border="1">
+      <table>
         <thead>
           <tr>
             <th>Name</th>

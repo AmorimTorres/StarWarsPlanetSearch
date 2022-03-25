@@ -1,0 +1,16 @@
+.table {
+  background-color: black;
+  color: yellow;
+}
+
+.search_by_name {
+  padding-top: 20px;
+  text-align: center;
+}
+
+.search_inputs {
+  display: flex;
+  justify-content: space-evenly;
+  padding-top: 20px;
+  text-align: center;
+}
