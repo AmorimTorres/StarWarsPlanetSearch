@@ -132,3 +132,7 @@ function Inputs() {
 }
 
 export default Inputs;
+
+// REFERENCIAS
+
+// PARA CRIAR O BOTÃO "DELETE (X)" DE CADA FILTRO, USEI O SEGUINTE CONTEÚDO: https://www.youtube.com/watch?v=1qFsJ5VqXTE
